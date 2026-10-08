@@ -1,0 +1,25 @@
+# ============================================================
+# atk_f103 版本控制忽略清单
+# 原则：只忽略「可再生的中间产物与临时文件」；
+#       交付物（hex / axf / map / build_log.htm）与源码全部纳入版本控制。
+# ============================================================
+
+# ---- Keil / Arm Compiler 编译中间产物（可由 keilkill.bat 清理，重新编译即生成）----
+Output/*.o
+Output/*.d
+Output/*.lnp
+Output/*.dep
+
+# ---- Keil 用户界面状态、外挂插件日志与锁文件 ----
+*.uvguix.*
+Projects/MDK-ARM/.vscode/*.log
+*.lock
+
+# ---- STM32CubeMX 临时目录 ----
+MXTmpFiles/
+*.tmp_save
+
+# ---- 编辑器 / 系统杂项 ----
+Thumbs.db
+desktop.ini
+.DS_Store
