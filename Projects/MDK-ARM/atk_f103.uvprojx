@@ -627,11 +627,13 @@
             <File>
               <FileName>app_onenet.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../User/App/app_onenet.c</FilePath></File>
+              <FilePath>../../User/App/app_onenet.c</FilePath>
+            </File>
             <File>
               <FileName>app_net.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../User/App/app_net.c</FilePath></File>
+              <FilePath>../../User/App/app_net.c</FilePath>
+            </File>
             <File>
               <FileName>app_th.c</FileName>
               <FileType>1</FileType>

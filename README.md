@@ -82,15 +82,18 @@
 ```
 atk_f103/
 ├── atk_f103.ioc          STM32CubeMX 工程配置（可随时重新生成代码）
-├── Core/                 CubeMX 生成（Inc / Src），只在 USER CODE 段加了两行：include 与 app_main()
+├── User/                 CubeMX 生成（Inc / Src），只在 USER CODE 段加了两行：include 与 app_main()
 ├── Drivers/              驱动层（结构对齐正点原子例程）
 │   ├── BSP/              LED / BEEP / KEY / LCD / DHT11 / SHT30 / LSENS / ESP8266 / RTC / STMFLASH
 │   ├── SYSTEM/           sys / delay（SysTick 时钟摘取法，µs 级延时）/ usart（printf 重定向）
 │   ├── CMSIS/            ARM CMSIS
 │   └── STM32F1xx_HAL_Driver/   ST HAL 库
 ├── User/App/             应用层（自写代码集中于此，CubeMX 重新生成不会覆盖）
-│   ├── app_config.h      ★ 全部可配置项
+│   ├── app_config.h      ★ 全部可配置项（凭据优先从 app_config_local.h 读取）
 │   ├── app_main.c        主循环：采集 → 显示 → 上报 → 心跳 → 断线重连
+│   ├── app_ui.c          LCD 显示界面
+│   ├── app_th.c          温湿度传感器（SHT30/DHT11 自动探测）
+│   ├── app_net.c         ESP8266 AT 状态机
 │   ├── app_alarm.c       两级超限判断 + 确认窗 + 迟滞 → 蜂鸣器与整屏闪烁 + 消音
 │   ├── app_mqtt.c        极简 MQTT 3.1.1（CONNECT / PUBLISH / PINGREQ / DISCONNECT）
 │   ├── app_onenet.c      OneNET 主题与 JSON 载荷组装

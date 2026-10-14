@@ -17,6 +17,7 @@ Output/*.sct
 # ---- Keil 用户界面状态、外挂插件日志与锁文件 ----
 *.uvguix.*
 Projects/MDK-ARM/.vscode/*.log
+Projects/MDK-ARM/build.log
 *.lock
 
 # ---- STM32CubeMX 临时目录 ----
