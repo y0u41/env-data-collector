@@ -35,8 +35,13 @@
 #define APP_ENABLE_NET          1
 
 /* ============================ 4. WiFi 热点 (必须 2.4GHz) ============================ */
+/* ★ 凭据安全：优先从 app_config_local.h 读取（已 gitignore），不存在时用下面默认值 ★ */
+#if __has_include("app_config_local.h")
+#include "app_config_local.h"
+#else
 #define APP_WIFI_SSID           "OPPOA5PRO"             /* 热点名称 */
 #define APP_WIFI_PWD            "tmy11111"              /* 热点密码, 开放热点填 "" */
+#endif
 
 /* ============================ 5. OneNET 接入参数 ============================ */
 /* 控制台 -> 产品 -> 产品ID; 设备 -> 设备名; 设备详情 -> 设备密钥(用于生成 token)
@@ -47,10 +52,17 @@
 #define ONENET_HOST             "mqtts.heclouds.com"    /* 非加密接入点 */
 #define ONENET_PORT             1883
 
+/* OneNET 参数优先从 app_config_local.h 读取 */
+#ifndef ONENET_PID
 #define ONENET_PID              "feCiGN7S9q"            /* 产品 ID */
+#endif
+#ifndef ONENET_DEVICE
 #define ONENET_DEVICE           "dht111"                /* 设备名称 */
+#endif
 /* token(由上面的设备密钥 + 产品ID + 设备名算出, et=2000000000 即 2033 年到期) */
+#ifndef ONENET_TOKEN
 #define ONENET_TOKEN            "version=2018-10-31&res=products%2FfeCiGN7S9q%2Fdevices%2Fdht111&et=2000000000&method=sha1&sign=uKV9j8kzJvhULgKpXpXDgjmM5AI%3D"
+#endif
 
 /* 上报格式:
  *   0 = 数据流-数据点  主题 $sys/{pid}/{dev}/dp/post/json      (MQTT物联网套件, 不需要预先定义物模型)

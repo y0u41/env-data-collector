@@ -1,0 +1,27 @@
+/**
+ ****************************************************************************************************
+ * @file        app_config_local.h
+ * @brief       本地凭据配置（已加入 .gitignore，不会入库）
+ * @note        ★ 首次使用：复制本文件为 app_config_local.h 并填写真实参数 ★
+ *              app_config.h 会自动 include 本文件
+ ****************************************************************************************************
+ */
+
+#ifndef __APP_CONFIG_LOCAL_H
+#define __APP_CONFIG_LOCAL_H
+
+/* ============================ WiFi 热点 ============================ */
+#define APP_WIFI_SSID           "YOUR_WIFI_SSID"        /* 热点名称 */
+#define APP_WIFI_PWD            "YOUR_WIFI_PWD"         /* 热点密码, 开放热点填 "" */
+
+/* ============================ OneNET 接入参数 ============================ */
+/* 设备密钥（token 到期后用它重算，见 readme.txt） */
+/* #define ONENET_DEVICE_KEY    "YOUR_DEVICE_KEY" */
+
+#define ONENET_PID              "YOUR_PRODUCT_ID"       /* 产品 ID */
+#define ONENET_DEVICE           "YOUR_DEVICE_NAME"      /* 设备名称 */
+
+/* token（由设备密钥 + 产品ID + 设备名算出） */
+#define ONENET_TOKEN            "YOUR_TOKEN"
+
+#endif
