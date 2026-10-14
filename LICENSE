@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2026 唐明宇
+Copyright (c) 2025 y0u41
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -19,9 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
----
-
-注意：本工程 Drivers/ 目录下的底层驱动与工程模板源自「正点原子精英版」例程，
-版权归广州市星翼电子科技有限公司所有；MIT 许可仅针对本项目自写部分
-（User/App/ 应用层、Docs/ 文档与本 README）。
