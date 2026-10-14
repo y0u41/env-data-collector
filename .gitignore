@@ -9,6 +9,7 @@ Output/*.o
 Output/*.d
 Output/*.lnp
 Output/*.dep
+Output/*.sct
 
 # ---- Keil 用户界面状态、外挂插件日志与锁文件 ----
 *.uvguix.*

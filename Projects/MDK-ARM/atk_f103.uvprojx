@@ -340,7 +340,7 @@
               <MiscControls>-Wno-unused-function -Wno-unused-parameter -Wno-char-subscripts -Wno-missing-braces -Wno-missing-field-initializers -Wno-invalid-source-encoding</MiscControls>
               <Define>USE_HAL_DRIVER,STM32F103xE</Define>
               <Undefine></Undefine>
-              <IncludePath>../../Core/Inc;../../Drivers/STM32F1xx_HAL_Driver/Inc;../../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy;../../Drivers/CMSIS/Device/ST/STM32F1xx/Include;../../Drivers/CMSIS/Include;../../Drivers/;../../User</IncludePath>
+              <IncludePath>../../User;../../Drivers/STM32F1xx_HAL_Driver/Inc;../../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy;../../Drivers/CMSIS/Device/ST/STM32F1xx/Include;../../Drivers/CMSIS/Include;../../Drivers/;../../User</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -397,32 +397,32 @@
             <File>
               <FileName>main.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../Core/Src/main.c</FilePath>
+              <FilePath>../../User/main.c</FilePath>
             </File>
             <File>
               <FileName>gpio.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../Core/Src/gpio.c</FilePath>
+              <FilePath>../../User/gpio.c</FilePath>
             </File>
             <File>
               <FileName>adc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../Core/Src/adc.c</FilePath>
+              <FilePath>../../User/adc.c</FilePath>
             </File>
             <File>
               <FileName>usart.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../Core/Src/usart.c</FilePath>
+              <FilePath>../../User/usart.c</FilePath>
             </File>
             <File>
               <FileName>stm32f1xx_it.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../Core/Src/stm32f1xx_it.c</FilePath>
+              <FilePath>../../User/stm32f1xx_it.c</FilePath>
             </File>
             <File>
               <FileName>stm32f1xx_hal_msp.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../Core/Src/stm32f1xx_hal_msp.c</FilePath>
+              <FilePath>../../User/stm32f1xx_hal_msp.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -527,7 +527,7 @@
             <File>
               <FileName>system_stm32f1xx.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../Core/Src/system_stm32f1xx.c</FilePath>
+              <FilePath>../../User/system_stm32f1xx.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -627,7 +627,20 @@
             <File>
               <FileName>app_onenet.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../User/App/app_onenet.c</FilePath>
+              <FilePath>../../User/App/app_onenet.c</FilePath></File>
+            <File>
+              <FileName>app_net.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../User/App/app_net.c</FilePath></File>
+            <File>
+              <FileName>app_th.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../User/App/app_th.c</FilePath>
+            </File>
+            <File>
+              <FileName>app_ui.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../User/App/app_ui.c</FilePath>
             </File>
           </Files>
         </Group>
