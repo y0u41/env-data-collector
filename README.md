@@ -51,17 +51,17 @@
 ```
 env-data-collector/
 ├── User/App/             # ★ 应用层（11 个文件 / 2409 行）
-│   ├── app_config.h      # 配置中心
-│   ├── app_main.c        # 主循环
-│   ├── app_ui.c          # LCD 界面
-│   ├── app_alarm.c       # 两级报警
-│   ├── app_net.c         # ESP8266 状态机
-│   ├── app_mqtt.c        # MQTT 客户端
+│   ├── app_config.h      # 配置中心         
+│   ├── app_main.c        # 主循环           
+│   ├── app_ui.c          # LCD 界面         
+│   ├── app_alarm.c       # 两级报警         
+│   ├── app_net.c         # ESP8266 状态机   
+│   ├── app_mqtt.c        # MQTT 客户端      
 │   └── app_log.c         # 报警历史（FLASH）
-├── Drivers/BSP/          # 硬件驱动
-├── Docs/                 # 项目文档
-├── Output/               # 编译产物 + 固件
-└── Tools/                # ESP8266 烧录说明
+├── Drivers/BSP/          # 硬件驱动         
+├── Docs/                 # 项目文档         
+├── Output/               # 编译产物 + 固件  
+└── Tools/                # ESP8266 烧录说明 
 ```
 
 ## 🚀 快速开始
@@ -136,14 +136,14 @@ env-data-collector/
 ## 数据流
 
 ```
- 温湿度传感器       ┐
-  DHT11 (PG11)     │
+ 温湿度传感器                                                                           ┐
+  DHT11 (PG11)                                                                          │
    或              ├─► STM32F103ZET6 ──┬─► TFTLCD (FSMC)   本地实时显示  ← 核心，始终工作
-  SHT30 (PB6/PB7)  │   72MHz / HAL     │
- 光敏 LS1 (PF8)    ┘                   └─► USART3 (PB10/PB11) ─► ESP8266 ─► WiFi 2.4G
-   ADC3_IN6                                                （APP_ENABLE_NET=1 时启用）│
-                                                      MQTT over TCP :1883          │
-                                                 mqtts.heclouds.com ◄───────────────┘
+  SHT30 (PB6/PB7)  │   72MHz / HAL                                                      │
+ 光敏 LS1 (PF8)    ┘                   └─► USART3 (PB10/PB11) ─► ESP8266 ─► WiFi 2.4G    
+   ADC3_IN6                                                （APP_ENABLE_NET=1 时启用）  │
+                                                      MQTT over TCP :1883               │
+                                                 mqtts.heclouds.com ◄───────────────    ┘
                                                       OneNET「MQTT 物联网套件」
                                               数据流: temp / humi / lux
 
@@ -170,25 +170,25 @@ atk_f103/
 ├── User/                 CubeMX 生成（Inc / Src），只在 USER CODE 段加了两行：include 与 app_main()
 ├── Drivers/              驱动层（结构对齐正点原子例程）
 │   ├── BSP/              LED / BEEP / KEY / LCD / DHT11 / SHT30 / LSENS / ESP8266 / RTC / STMFLASH
-│   ├── SYSTEM/           sys / delay（SysTick 时钟摘取法，µs 级延时）/ usart（printf 重定向）
-│   ├── CMSIS/            ARM CMSIS
-│   └── STM32F1xx_HAL_Driver/   ST HAL 库
-├── User/App/             应用层（自写代码集中于此，CubeMX 重新生成不会覆盖）
-│   ├── app_config.h      ★ 全部可配置项（凭据优先从 app_config_local.h 读取）
-│   ├── app_main.c        主循环：采集 → 显示 → 上报 → 心跳 → 断线重连
-│   ├── app_ui.c          LCD 显示界面
-│   ├── app_th.c          温湿度传感器（SHT30/DHT11 自动探测）
-│   ├── app_net.c         ESP8266 AT 状态机
-│   ├── app_alarm.c       两级超限判断 + 确认窗 + 迟滞 → 蜂鸣器与整屏闪烁 + 消音
-│   ├── app_mqtt.c        极简 MQTT 3.1.1（CONNECT / PUBLISH / PINGREQ / DISCONNECT）
-│   ├── app_onenet.c      OneNET 主题与 JSON 载荷组装
-│   └── app_log.c         报警历史（片内 FLASH 末页，64 条环形 + CRC16）
-├── Projects/MDK-ARM/     Keil 工程 atk_f103.uvprojx
-├── Output/               编译产物与交付固件（atk_f103.hex）
-├── Tools/                ESP8266 AT 固件烧录说明 + AT 串口引脚补丁（备查）
-├── Docs/                 项目文档（见下）
-├── readme.txt            接线表 / OneNET 配置 / AT 排错（GBK 编码，被 Keil 工程引用，勿移动）
-└── keilkill.bat          清理编译中间文件
+│   ├── SYSTEM/           sys / delay（SysTick 时钟摘取法，µs 级延时）/ usart（printf 重定向）     
+│   ├── CMSIS/            ARM CMSIS                                                                
+│   └── STM32F1xx_HAL_Driver/   ST HAL 库                                                          
+├── User/App/             应用层（自写代码集中于此，CubeMX 重新生成不会覆盖）                      
+│   ├── app_config.h      ★ 全部可配置项（凭据优先从 app_config_local.h 读取）                     
+│   ├── app_main.c        主循环：采集 → 显示 → 上报 → 心跳 → 断线重连                             
+│   ├── app_ui.c          LCD 显示界面                                                             
+│   ├── app_th.c          温湿度传感器（SHT30/DHT11 自动探测）                                     
+│   ├── app_net.c         ESP8266 AT 状态机                                                        
+│   ├── app_alarm.c       两级超限判断 + 确认窗 + 迟滞 → 蜂鸣器与整屏闪烁 + 消音                   
+│   ├── app_mqtt.c        极简 MQTT 3.1.1（CONNECT / PUBLISH / PINGREQ / DISCONNECT）              
+│   ├── app_onenet.c      OneNET 主题与 JSON 载荷组装                                              
+│   └── app_log.c         报警历史（片内 FLASH 末页，64 条环形 + CRC16）                           
+├── Projects/MDK-ARM/     Keil 工程 atk_f103.uvprojx                                               
+├── Output/               编译产物与交付固件（atk_f103.hex）                                       
+├── Tools/                ESP8266 AT 固件烧录说明 + AT 串口引脚补丁（备查）                        
+├── Docs/                 项目文档（见下）                                                         
+├── readme.txt            接线表 / OneNET 配置 / AT 排错（GBK 编码，被 Keil 工程引用，勿移动）     
+└── keilkill.bat          清理编译中间文件                                                         
 ```
 
 **代码规模**：应用层自写 **11 个文件 / 2,409 行**（`User/App`）。
