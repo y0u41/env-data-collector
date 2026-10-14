@@ -1,12 +1,97 @@
-# atk_f103 · 居家环境监测与报警终端
+# 🏠 居家环境监测与报警终端
 
-![License](https://img.shields.io/badge/license-MIT-green) ![Language](https://img.shields.io/badge/language-C-555555) ![Platform](https://img.shields.io/badge/platform-STM32F103ZET6-blue) ![Build](https://img.shields.io/badge/build-0%20Error-brightgreen)
+![License](https://img.shields.io/badge/license-MIT-green) ![Language](https://img.shields.io/badge/language-C-555555) ![Platform](https://img.shields.io/badge/platform-STM32F103ZET6-blue) ![Build](https://img.shields.io/badge/build-0%20Error-brightgreen) ![Net](https://img.shields.io/badge/Cloud-OneNET-orange)
 
-基于 **正点原子精英版 STM32F103ZET6** 的居家环境监测终端：**温湿度 / 光照采集 → TFT-LCD 本地显示 → 蜂鸣器与整屏闪烁报警 → ESP8266 上云（OneNET）**，并支持**报警历史掉电留存**。
+> 基于 STM32 的居家环境监测终端：温湿度/光照采集 → 本地显示 → 报警 → 上云 📡
 
-面向真实使用场景（独居老人居家监护）做了取舍：**两级报警抑制误报**、**非阻塞联网状态机**、**断线自动重连**、**报警历史写片内 FLASH**。
+## 这是什么？
 
-## 功能特性
+一个面向**独居老人居家监护**的环境监测设备，实时采集温湿度和光照数据，本地显示并支持两级报警（舒适区黄色提示、危险区蜂鸣器+整屏闪烁），同时可通过 ESP8266 上报 OneNET 云平台。
+
+**适合场景**：
+- 👴 独居老人居家监护
+- 📚 学习 STM32 传感器采集与报警设计
+- ☁️ 物联网（MQTT 上云）实战
+
+## ✨ 功能特性
+
+### 采集与显示
+- 🌡 **温湿度**：DHT11 / SHT30 自动探测（SHT30 优先）
+- 💡 **光照**：板载光敏传感器
+- 🖥 **TFT-LCD 实时显示**：Temp / Humi / Light / 联网状态
+
+### 两级报警（防误报）
+- 🟡 **舒适区**（18-28℃ / 40-70%RH）：黄色提示，**不响**
+- 🔴 **危险区**（<10 或 >32℃）：**蜂鸣器 + 整屏闪烁**
+- ✅ **确认窗**：连续越界 3s 才确认，滤瞬时尖峰
+- 🔕 **一键消音**：KEY0 立即停，回到舒适区自动解除
+
+### 云连接（可选）
+- ☁️ **ESP8266 + MQTT** 上报 OneNET
+- 🔌 **非阻塞状态机**：采集/显示/报警不中断
+- 📶 **断线自动重连**：最坏 65s 内察觉并重连
+
+### 报警历史
+- 💾 **片内 FLASH** 保存 64 条记录（掉电留存）
+- ⏱ 时间戳 + 报警原因 + 当时数值
+- 📖 KEY1 翻页回看
+
+## 🛠️ 硬件要求
+
+| 部件 | 说明 |
+|------|------|
+| 主控 | 正点原子精英版 STM32F103ZET6 |
+| 屏幕 | TFT-LCD（FSMC 并口） |
+| 传感器 | DHT11 或 SHT30 + 板载光敏 |
+| 联网 | ESP8266（AT 固件）|
+| 报警 | 蜂鸣器 + LCD 闪烁 |
+
+## 📁 目录结构
+
+```
+env-data-collector/
+├── User/App/             # ★ 应用层（11 个文件 / 2409 行）
+│   ├── app_config.h      # 配置中心
+│   ├── app_main.c        # 主循环
+│   ├── app_ui.c          # LCD 界面
+│   ├── app_alarm.c       # 两级报警
+│   ├── app_net.c         # ESP8266 状态机
+│   ├── app_mqtt.c        # MQTT 客户端
+│   └── app_log.c         # 报警历史（FLASH）
+├── Drivers/BSP/          # 硬件驱动
+├── Docs/                 # 项目文档
+├── Output/               # 编译产物 + 固件
+└── Tools/                # ESP8266 烧录说明
+```
+
+## 🚀 快速开始
+
+### 编译与烧录
+
+1. 工具链：**STM32CubeMX + Keil MDK（AC6）**
+2. 打开 `Projects\MDK-ARM\atk_f103.uvprojx`
+3. `F7` 编译（0 Error）→ `LOAD` 下载
+
+### 配置
+
+所有可调项在 `User/App/app_config.h`：
+- 传感器选择、报警阈值
+- 联网开关（`APP_ENABLE_NET`）
+- WiFi/MQTT 凭据（优先从 `app_config_local.h` 读取）
+
+## 📚 文档
+
+| 文档 | 内容 |
+|------|------|
+| [Docs/项目说明.md](Docs/项目说明.md) | 功能现状 / 数据流 / 设计决策 |
+| [Docs/基线变更记录.md](Docs/基线变更记录.md) | 变更与基线快照 |
+| [Docs/适老化优化建议_市场调研.md](Docs/适老化优化建议_市场调研.md) | 市场调研与路线图 |
+
+## 📄 许可证
+
+[MIT License](LICENSE) © y0u41
+
+底层驱动基于正点原子例程，版权归广州市星翼电子科技有限公司。
 
 - 🌡 **温湿度采集（双传感器自动探测）**：DHT11（PG11，单总线）与 SHT30（PB6/PB7，软件 I2C）二选一，默认开机自动探测、**SHT30 优先**，识别结果打印串口并显示在 LCD 末行
 - 💡 **光照采集**：板载光敏 LS1（PF8 = ADC3_IN6），按满量程换算为 cd/m²
